@@ -15,7 +15,7 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
 
     public static final String TAG = OpenGLRenderer.class.getSimpleName();
 
-    private Square mSquare = new Square();
+    private Square mSquare = new FlatColoredSquare();
     private int angle = 1;
 
     @Override
