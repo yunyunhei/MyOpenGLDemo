@@ -15,7 +15,9 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
 
     public static final String TAG = OpenGLRenderer.class.getSimpleName();
 
-    Square mSquare  = new Square();
+    private Square mSquare = new Square();
+    private int angle = 1;
+
     @Override
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
         // Set the background color to black ( rgba ).
@@ -31,7 +33,7 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
         // Really nice perspective calculations.
         gl.glHint(GL10.GL_PERSPECTIVE_CORRECTION_HINT, // OpenGL docs.
                 GL10.GL_NICEST);
-        Log.d(TAG,"onSurfaceCreated ");
+        Log.d(TAG, "onSurfaceCreated ");
     }
 
     @Override
@@ -50,7 +52,7 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
         gl.glMatrixMode(GL10.GL_MODELVIEW);// OpenGL docs.
         // Reset the modelview matrix
         gl.glLoadIdentity();// OpenGL docs.
-        Log.d(TAG,"onSurfaceChanged ");
+        Log.d(TAG, "onSurfaceChanged ");
 
     }
 
@@ -61,9 +63,56 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
                 GL10.GL_DEPTH_BUFFER_BIT);
 
         gl.glLoadIdentity();
-        gl.glTranslatef(0,0,-4);
+        // Translates 10 units into the screen.
+        gl.glTranslatef(0, 0, -10);
+
+
+        // SQUARE A
+        // Save the current matrix.
+        gl.glPushMatrix();
+        // Rotate square A counter-clockwise.
+        gl.glRotatef(angle, 0, 0, 1);
+        // Draw square A.
         mSquare.draw(gl);
-        Log.d(TAG,"onDrawFrame ");
+        // Restore the last matrix.
+        gl.glPopMatrix();
+
+
+        // SQUARE B
+        // Save the current matrix
+        gl.glPushMatrix();
+        // Rotate square B before moving it,
+        //making it rotate around A.
+        gl.glRotatef(-angle, 0, 0, 1);
+        // Move square B.
+        gl.glTranslatef(2, 0, 0);
+        // Scale it to 50% of square A
+        gl.glScalef(.5f, .5f, .5f);
+        // Draw square B.
+        mSquare.draw(gl);
+
+
+        // SQUARE C
+        // Save the current matrix
+        gl.glPushMatrix();
+        // Make the rotation around B
+        gl.glRotatef(-angle, 0, 0, 1);
+        gl.glTranslatef(2, 0, 0);
+        // Scale it to 50% of square B
+        gl.glScalef(.5f, .5f, .5f);
+        // Rotate around it's own center.
+        gl.glRotatef(angle * 10, 0, 0, 1);
+        // Draw square C.
+        mSquare.draw(gl);
+        // Restore to the matrix as it was before C.
+        gl.glPopMatrix();
+        // Restore to the matrix as it was before B.
+        gl.glPopMatrix();
+        // Increse the angle.
+        angle++;
+
+
+        Log.d(TAG, "onDrawFrame ");
 
     }
 }
