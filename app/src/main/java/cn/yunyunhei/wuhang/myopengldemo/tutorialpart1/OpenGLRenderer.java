@@ -2,6 +2,7 @@ package cn.yunyunhei.wuhang.myopengldemo.tutorialpart1;
 
 import android.opengl.GLSurfaceView;
 import android.opengl.GLU;
+import android.util.Log;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
@@ -12,6 +13,7 @@ import javax.microedition.khronos.opengles.GL10;
 
 public class OpenGLRenderer implements GLSurfaceView.Renderer {
 
+    public static final String TAG = OpenGLRenderer.class.getSimpleName();
 
     Square mSquare  = new Square();
     @Override
@@ -29,6 +31,7 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
         // Really nice perspective calculations.
         gl.glHint(GL10.GL_PERSPECTIVE_CORRECTION_HINT, // OpenGL docs.
                 GL10.GL_NICEST);
+        Log.d(TAG,"onSurfaceCreated ");
     }
 
     @Override
@@ -47,6 +50,7 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
         gl.glMatrixMode(GL10.GL_MODELVIEW);// OpenGL docs.
         // Reset the modelview matrix
         gl.glLoadIdentity();// OpenGL docs.
+        Log.d(TAG,"onSurfaceChanged ");
 
     }
 
@@ -59,6 +63,7 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
         gl.glLoadIdentity();
         gl.glTranslatef(0,0,-4);
         mSquare.draw(gl);
+        Log.d(TAG,"onDrawFrame ");
 
     }
 }
