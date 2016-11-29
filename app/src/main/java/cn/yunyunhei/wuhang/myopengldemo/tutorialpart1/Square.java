@@ -13,18 +13,18 @@ import javax.microedition.khronos.opengles.GL10;
 
 public class Square {
     // Our vertices.
-    private float vertices[] = {
+    protected float vertices[] = {
             -1.0f, 1.0f, 0.0f,  // 0, Top Left
             -1.0f, -1.0f, 0.0f,  // 1, Bottom Left
             1.0f, -1.0f, 0.0f,  // 2, Bottom Right
             1.0f, 1.0f, 0.0f,  // 3, Top Right
     };
     // The order we like to connect them.
-    private short[] indices = {0, 1, 2, 0, 2, 3};
+    protected short[] indices = {0, 1, 2, 0, 2, 3};
     // Our vertex buffer.
-    private FloatBuffer vertexBuffer;
+    protected FloatBuffer vertexBuffer;
     // Our index buffer.
-    private ShortBuffer indexBuffer;
+    protected ShortBuffer indexBuffer;
 
     public Square() {
         // a float is 4 bytes, therefore we
