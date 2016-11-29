@@ -13,6 +13,10 @@
         </activity>
 
         <activity android:name=".tutorialpart1.TutorialPartI">
+
+        </activity>
+
+        <activity android:name=".tutorialpart1.TutorialPartVI">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
